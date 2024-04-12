@@ -133,7 +133,6 @@ exports.login = async (req, res) => {
     const ans = await bcrypt.compare(password, user.password)
     if (ans === true) {
       // Generating JWT token
-      consol.log(user);
       const token = jwt.sign(
         { email: user.email, id: user._id, role: user.accountType },
         process.env.JWT_SECRET,
