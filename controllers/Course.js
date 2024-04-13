@@ -30,8 +30,6 @@ exports.createCourse = async (req, res) => {
     const tag = JSON.parse(_tag)
     const instructions = JSON.parse(_instructions)
 
-    console.log("tag", tag)
-    console.log("instructions", instructions)
 
     // Check if any of the required fields are missing
     if (
@@ -114,7 +112,6 @@ exports.createCourse = async (req, res) => {
       },
       { new: true }
     )
-    console.log("HEREEEEEEEE", categoryDetails2)
     // Return the new course and a success message
     res.status(200).json({
       success: true,
@@ -229,58 +226,6 @@ exports.getAllCourses = async (req, res) => {
     })
   }
 }
-// Get One Single Course Details
-// exports.getCourseDetails = async (req, res) => {
-//   try {
-//     const { courseId } = req.body
-//     const courseDetails = await Course.findOne({
-//       _id: courseId,
-//     })
-//       .populate({
-//         path: "instructor",
-//         populate: {
-//           path: "additionalDetails",
-//         },
-//       })
-//       .populate("category")
-//       .populate("ratingAndReviews")
-//       .populate({
-//         path: "courseContent",
-//         populate: {
-//           path: "subSection",
-//         },
-//       })
-//       .exec()
-//     // console.log(
-//     //   "###################################### course details : ",
-//     //   courseDetails,
-//     //   courseId
-//     // );
-//     if (!courseDetails || !courseDetails.length) {
-//       return res.status(400).json({
-//         success: false,
-//         message: `Could not find course with id: ${courseId}`,
-//       })
-//     }
-
-//     if (courseDetails.status === "Draft") {
-//       return res.status(403).json({
-//         success: false,
-//         message: `Accessing a draft course is forbidden`,
-//       })
-//     }
-
-//     return res.status(200).json({
-//       success: true,
-//       data: courseDetails,
-//     })
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: error.message,
-//     })
-//   }
-// }
 exports.getCourseDetails = async (req, res) => {
   try {
     const { courseId } = req.body
@@ -310,13 +255,6 @@ exports.getCourseDetails = async (req, res) => {
         message: `Could not find course with id: ${courseId}`,
       })
     }
-
-    // if (courseDetails.status === "Draft") {
-    //   return res.status(403).json({
-    //     success: false,
-    //     message: `Accessing a draft course is forbidden`,
-    //   });
-    // }
 
     let totalDurationInSeconds = 0
     courseDetails.courseContent.forEach((content) => {

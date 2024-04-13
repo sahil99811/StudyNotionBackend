@@ -133,7 +133,6 @@ exports.login = async (req, res) => {
     const ans = await bcrypt.compare(password, user.password)
     if (ans === true) {
       // Generating JWT token
-      consol.log(user);
       const token = jwt.sign(
         { email: user.email, id: user._id, role: user.accountType },
         process.env.JWT_SECRET,
@@ -203,7 +202,6 @@ exports.sendotp = async (req, res) => {
     // Creating OTP payload and saving it to the database
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
-    console.log("OTP Body", otpBody)
     res.status(200).json({
       success: true,
       message: `OTP Sent Successfully`,

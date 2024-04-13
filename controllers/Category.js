@@ -12,7 +12,7 @@ exports.createCategory = async (req, res) => {
 				.status(400)
 				.json({ success: false, message: "All fields are required" });
 		}
-		const CategorysDetails = await Category.create({
+		await Category.create({
 			name: name,
 			description: description,
 		});
@@ -30,7 +30,6 @@ exports.createCategory = async (req, res) => {
 
 exports.showAllCategories = async (req, res) => {
 	try {
-    console.log("show all category");
 		const allCategory = await Category.find({});
 		res.status(200).json({
 			success: true,
@@ -90,7 +89,7 @@ exports.getCategoryPageDetails = async (req, res) => {
         .exec()
       const allCourses = allCategories.flatMap((category) => category.courses)
       const mostSellingCourses = allCourses
-        .sort((a, b) => b.sold - a.sold)
+        .sort((a, b) => b.studentsEnrolled.length - a.studentsEnrolled.length)
         .slice(0, 10)
       res.status(200).json({
         success: true,
