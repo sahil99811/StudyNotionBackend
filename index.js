@@ -29,7 +29,7 @@ app.use(
 )
 app.use(
 	cors({
-		origin:"http://localhost:3000",
+		origin:"https://study-notion-frontend-ecru.vercel.app",
 		credentials:true,
 	})
 )
