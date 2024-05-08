@@ -23,7 +23,7 @@ exports.resetPasswordToken = async (req, res) => {
 			},
 			{ new: true }
 		);
-		const url = `https://study-notion-tawny-chi.vercel.app/${token}`;
+		const url = `${process.env.FRONTEND_URL}/update-password/:${token}`;
 
 		await mailSender(
 			email,
